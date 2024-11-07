@@ -12,12 +12,14 @@ type Props = {
 export const revalidate = 60;
 
 export default async function Page({ params }: Props) {
-  const { tagId } = params;
-  const data = await getList({
-    limit: LIMIT,
-    filters: `tags[contains]${tagId}`,
-  });
-  const tag = await getTag(tagId);
+  const { tagId } = await params;
+  const [data] = await Promise.all([
+    getList({
+      limit: LIMIT,
+      filters: `tags[contains]${tagId}`,
+    }),
+    getTag(tagId),
+  ]);
   return (
     <>
       <ArticleList articles={data.contents} />

@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default async function TagsLayout({ children, params }: Props) {
-  const { tagId } = params;
+  const { tagId } = await params;
   const tag = await getTag(tagId);
   return (
     <div>

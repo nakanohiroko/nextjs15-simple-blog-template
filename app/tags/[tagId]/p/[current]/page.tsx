@@ -13,7 +13,7 @@ type Props = {
 export const revalidate = 60;
 
 export default async function Page({ params }: Props) {
-  const { tagId } = params;
+  const { tagId } = await params;
   const current = parseInt(params.current as string, 10);
   const data = await getList({
     limit: LIMIT,
